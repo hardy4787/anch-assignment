@@ -1,0 +1,113 @@
+<div class="page-header mb-4">Contacts</div>
+<div class="row mb-4">
+  <div class="col text-center">
+    <div class="role-member-name">Total users</div>
+    <div class="role-member-count">{{ dataSource.length }}</div>
+  </div>
+  <ng-container *ngFor="let role of roles | keyvalue">
+    <div class="col text-center">
+      <div class="role-member-name">{{ role.key }}</div>
+      <div
+        *ngIf="isVisible"
+        [@visibleHidden]="isVisible ? 'visible' : 'hidden'"
+        class="role-member-count"
+      >
+        {{ role.value }}
+      </div>
+    </div>
+  </ng-container>
+</div>
+<form [formGroup]="filterForm">
+  <div class="row justify-content-start">
+    <div class="col-lg-5 col-md-7">
+      <mat-form-field appearance="outline">
+        <mat-label>Name or email address</mat-label>
+        <input
+          formControlName="searchUser"
+          matInput
+          placeholder="Name or email address"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-lg-3 col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Organization</mat-label>
+        <mat-select formControlName="organisationUnit">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option
+            *ngFor="let organisationUnit of organizationUnits"
+            [value]="organisationUnit"
+          >
+            {{ organisationUnit }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix class="expand-more">expand_more </mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Job Title</mat-label>
+        <mat-select formControlName="jobTitle">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let jobTitle of jobTitles" [value]="jobTitle">
+            {{ jobTitle }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix class="expand-more">expand_more </mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-3 col-md-4">
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option *ngFor="let role of roles | keyvalue" [value]="role.key">
+            {{ role.key }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix class="expand-more">expand_more </mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div class="table-responsive mb-4">
+  <table mat-table [dataSource]="dataSource" class="table">
+    <ng-container matColumnDef="userInfo">
+      <th mat-header-cell *matHeaderCellDef>User</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="row align-items-center">
+          <div class="col-2 circle">
+            {{ element.firstName[0] }}{{ element.lastName[0] }}
+          </div>
+          <div class="col-6">
+            <div>{{ element.firstName }} {{ element.lastName }}</div>
+            <div class="email">{{ element.email }}</div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobTitle">
+      <th mat-header-cell *matHeaderCellDef>Job title</th>
+      <td mat-cell *matCellDef="let element">{{ element.jobTitle }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="organisationUnit">
+      <th mat-header-cell *matHeaderCellDef>Organization</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.organisationUnit }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

@@ -1,0 +1,13 @@
+@import "./app/shared/styles/colors";
+@import "./app/shared/styles/fonts";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  color: $color-raisen-black;
+  font-family: "AvenirNextRegular";
+}

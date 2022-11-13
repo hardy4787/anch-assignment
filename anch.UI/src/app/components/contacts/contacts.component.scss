@@ -1,0 +1,81 @@
+@import "../../shared/styles/colors";
+
+.page-header,
+.role-member-count {
+  font-family: "CormorantGaramondMedium";
+  font-size: 32px;
+}
+
+.page-header {
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+  }
+}
+
+::ng-deep.mat-select-arrow {
+  display: none;
+}
+
+.role-member-name {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 47px;
+}
+
+.mat-table {
+  font-size: 14px;
+}
+
+.email {
+  font-size: 12px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.table-responsive {
+  background-color: transparent;
+  height: 400px;
+  overflow: auto;
+
+  th {
+    font-family: "AvenirNextDemiBold";
+    color: $color-raisen-black;
+    background-color: $color-white-smoke;
+  }
+
+  td,
+  th {
+    vertical-align: middle;
+  }
+
+  tr.mat-row {
+    height: 67.5px;
+  }
+
+  .mat-column-userInfo {
+    min-width: 400px;
+  }
+
+  .mat-column-jobTitle,
+  .mat-column-organisationUnit,
+  .mat-column-role {
+    min-width: 200px;
+  }
+
+  .circle {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    background: #fff;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+  }
+}
